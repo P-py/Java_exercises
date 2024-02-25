@@ -5,6 +5,7 @@ import java.util.Scanner;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 
 public class DateHour{
@@ -13,6 +14,9 @@ public class DateHour{
 		Scanner sc = new Scanner(System.in);
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 		DateTimeFormatter formatterTime = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+		DateTimeFormatter formatterToText = DateTimeFormatter.ofPattern("dd/MM HH:mm");
+		//gets user default timezone and formats instant objects
+		DateTimeFormatter formatterInstantToText = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm").withZone(ZoneId.systemDefault());
 		
 		LocalDate d01 = LocalDate.now(); //Local date without time
 		LocalDateTime d02 = LocalDateTime.now(); //Local date with time
@@ -36,6 +40,7 @@ public class DateHour{
 		LocalDate d10 = LocalDate.of(2024, 2, 22);
 		LocalDateTime d11 = LocalDateTime.of(2024, 2, 22, 20, 42);
 		
+		//Formating DateTime to a customized text format
 		System.out.println("LocalDate = "+d01);
 		System.out.println("LocalDateTime = "+d02);
 		System.out.println("Instant = "+d03);
@@ -47,6 +52,10 @@ public class DateHour{
 		System.out.println("LocalDateTime object based on customized text+formatter = "+d09);
 		System.out.println("LocalDate object based on variables = "+d10);
 		System.out.println("LocalDateTime object based on variables = "+d11);
+		System.out.println("LocalDateTime object to customized text using DateTimeFormatter = "+d05.format(formatterToText));
+		System.out.println("LocalDateTime object to customized text using DateTimeFormatter = "+formatterToText.format(d05));
+		System.out.println("LocalDateTime object to customized text using DateTimeFormatter = "+d05.format(DateTimeFormatter.ofPattern("dd/MM HH:mm")));
+		System.out.println("Instant object to customized text using DateTimeFormatter+withZone method = "+formatterInstantToText.format(d06));
 		
 		sc.close();
 	}
