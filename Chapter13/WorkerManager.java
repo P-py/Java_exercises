@@ -34,10 +34,11 @@ public class WorkerManager{
 		System.out.printf("Base salary: ");
 		salary = sc.nextDouble();
 		Worker worker = new Worker(workerName, level, salary, department);
+		
 		System.out.printf("Contracts for this worker: ");
 		amountContracts = sc.nextInt();
 		for (int i=0; i<amountContracts; i++) {
-			System.out.printf("Contract #%d data: \n", i+1);
+			System.out.printf("\nContract #%d data: \n", i+1);
 			System.out.printf("\nDate (DD/MM/YYYY): ");
 			sc.nextLine();
 			LocalDate contractDate = LocalDate.parse(sc.nextLine(), formatterDateContract);
