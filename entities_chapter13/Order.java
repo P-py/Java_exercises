@@ -2,41 +2,67 @@ package entities_chapter13;
 
 import java.time.LocalDateTime;
 import entities.enums.OrderStatus;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Order {
-	private Integer id;
 	private LocalDateTime moment;
 	private OrderStatus status;
+	private List<OrderItem> itemList = new ArrayList<>();
+	private Client client;
+	
+	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
 	
 	public Order() {
-		
 	}
-	public Order(Integer id, LocalDateTime moment, OrderStatus status) {
-		this.id = id;
-		this.moment = moment;
-		this.status = status;
+	public Order(LocalDateTime inputMoment, OrderStatus inputStatus, Client inputClient) {
+		this.moment = inputMoment;
+		this.status = inputStatus;
+		this.client = inputClient;
 	}
-	public void setId(Integer id) {
-		this.id = id;
+	public String getStatus() {
+		return status.toString();
 	}
-	public void setMoment(LocalDateTime moment) {
-		this.moment = moment;
+	public String getMoment() {
+		return moment.format(formatter).toString();
 	}
-	public void setStatus(OrderStatus status) {
-		this.status = status;
+	public Client getClient() {
+		return client;
 	}
-	public Integer getId() {
-		return this.id;
+	public void setStatus(OrderStatus inputStatus) {
+		this.status = inputStatus;
 	}
-	public LocalDateTime getMoment() {
-		return this.moment;
+	public void setMoment(LocalDateTime inputMoment) {
+		this.moment = inputMoment;
 	}
-	public OrderStatus getStatus() {
-		return this.status;
+	public void setClient(Client inputClient) {
+		this.client = inputClient;
 	}
-	
-	@Override
+	public void addOrderItem(OrderItem inputItem) {
+		itemList.add(inputItem);
+	}
+	public void removeOrderItem(OrderItem inputItem) {
+		itemList.remove(inputItem);
+	}
+	public Double total() {
+		double totalSum=0;
+		for (OrderItem item : itemList) {
+			totalSum += item.subTotal();
+		}
+		return totalSum;
+	}
 	public String toString() {
-		return "Order - id: "+id+", moment: "+moment+", status: "+status;
+		StringBuilder sb = new StringBuilder();
+		sb.append("\nORDER SUMMARY\n");
+		sb.append("Order moment: "+getMoment()+"\n");
+		sb.append("Order status: "+status.toString()+"\n");
+		sb.append("Client: "+client.toString()+"\n");
+		sb.append("Order items: \n");
+		for (OrderItem item : itemList) {
+			sb.append(item+"\n");
+		}
+		sb.append("Total price: $"+total());
+		return sb.toString();
 	}
 }
