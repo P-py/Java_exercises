@@ -17,7 +17,6 @@ public class TaxCalculator{
 		System.out.println("2 - Register company");
 		System.out.println("3 - Delete registered individual/company");
 		System.out.println("4 - View taxes");
-		System.out.println("5 - Change data");
 		System.out.println("6 - Exit");
 	}
 	public static void addIndividual(List<TaxPayer> payersList) {
@@ -77,13 +76,15 @@ public class TaxCalculator{
 			System.out.printf("\n\nTOTAL TAXES: %.2f", taxSum);
 		}
 	}
-	public static void changeData(List<TaxPayer> payersList) {
-		if (payersList.isEmpty()) {
-			System.out.println("\nYour payers database is empty - Can't change data.");
-		}
-		else {
-			
-		}
+	public static void dataOptionsIndividual() {
+		System.out.println("1 - Name");
+		System.out.println("2 - Income");
+		System.out.println("3 - Expenses");
+	}
+	public static void dataOptionsBusiness() {
+		System.out.println("1 - Name");
+		System.out.println("2 - Income");
+		System.out.println("3 - Number of employees");
 	}
 	public static void main(String[] args) {
 		Locale.setDefault(Locale.US);
@@ -107,9 +108,6 @@ public class TaxCalculator{
 					break;
 				case 4:
 					viewTaxes(payersList);
-					break;
-				case 5:
-					changeData(payersList);
 					break;
 				case 6:
 					System.exit(0);
