@@ -40,11 +40,11 @@ public class Reservation {
 		StringBuilder sb = new StringBuilder();
 		sb.append("Reservation: Room ");
 		sb.append(roomNumber);
-		sb.append(" check-in: ");
+		sb.append(", check-in: ");
 		sb.append(checkinDate.format(formatter));
 		sb.append(", check-out: ");
 		sb.append(checkoutDate.format(formatter));
-		sb.append(duration()+" nights");
+		sb.append(" "+duration()+" nights");
 		return sb.toString();
 	}
 }
