@@ -30,21 +30,13 @@ public class HotelManager{
 			checkin = LocalDate.parse(sc.nextLine(), formatter);
 			System.out.printf("\nCheck-out date (dd/mm/yyyy): ");
 			checkout = LocalDate.parse(sc.nextLine(), formatter);
-			
-			LocalDate now = LocalDate.now();
-			if (checkin.isAfter(now)&&checkout.isAfter(now)) {
-				if (!checkout.isAfter(checkin)) {
-					System.out.println("Error in update: check-out date must be after check-in.");
-				}
-				else {
-					reservation.updateDates(checkin, checkout);
-				}
+			String error = reservation.updateDates(checkin, checkout);
+			if (error!=null) {
+				System.out.printf("\nError in reservation: %s\n", error);
 			}
 			else {
-				System.out.println("Error in update: Dates for update must be at future.");
+				System.out.println(reservation);
 			}
-			
-			reservation.updateDates(checkin, checkout);
 		}
 		
 		
