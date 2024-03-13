@@ -31,9 +31,21 @@ public class Reservation {
 	public Integer duration() {
 		return checkoutDate.getDayOfYear() - checkinDate.getDayOfYear();
 	}
-	public void updateDates(LocalDate inputCheckin, LocalDate inputCheckout) {
-		 this.checkinDate = inputCheckin;
-		 this.checkoutDate = inputCheckout;
+	public String updateDates(LocalDate inputCheckin, LocalDate inputCheckout) {
+		LocalDate now = LocalDate.now();
+		if (inputCheckin.isAfter(now)&&inputCheckout.isAfter(now)) {
+			if (!inputCheckout.isAfter(inputCheckin)) {
+				return "Error in update: check-out date must be after check-in.";
+			}
+			else {
+				this.checkinDate = inputCheckin;
+				this.checkoutDate = inputCheckout;
+				return null;
+			}
+		}
+		else {
+			return "Error in update: Dates for update must be at future.";
+		}
 	}
 	@Override
 	public String toString() {
